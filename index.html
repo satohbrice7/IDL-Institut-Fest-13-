@@ -34,7 +34,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Bouton de musique flottant */
+        /* Bouton musique flottant */
         .music-control {
             position: fixed;
             top: 20px;
@@ -62,21 +62,31 @@
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(16px);
             border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 25px;
-            padding: 35px;
+            padding: 30px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        /* Animation d'assemblage de la page */
+        /* Masquer la scrollbar tout en gardant le scroll fluide */
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
         .step {
             display: none;
             opacity: 0;
-            transform: scale(0.9) translateY(30px);
+            transform: scale(0.95) translateY(20px);
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -86,9 +96,8 @@
             transform: scale(1) translateY(0);
         }
 
-        /* Animation des lettres du titre */
         .header-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 900;
             text-align: center;
             margin-bottom: 5px;
@@ -97,24 +106,30 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            animation: fadeInDown 0.8s ease;
         }
 
         .header-subtitle {
             text-align: center;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
             font-weight: 600;
             color: #fce4ec;
+            animation: fadeIn 1s ease;
         }
 
-        /* Message chaleureux animé */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .welcome-box {
             background: rgba(0, 0, 0, 0.25);
             border-left: 5px solid #ffe000;
             padding: 15px;
             border-radius: 12px;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
             line-height: 1.5;
             animation: slideInLeft 0.8s ease forwards;
         }
@@ -125,7 +140,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             animation: fadeInUp 0.8s ease forwards;
         }
 
@@ -136,21 +151,20 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         input, select {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 16px;
             background: rgba(255, 255, 255, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 12px;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             outline: none;
             transition: 0.3s;
@@ -171,63 +185,109 @@
             box-shadow: 0 0 15px rgba(255, 224, 0, 0.5);
         }
 
-        /* Grille des tailles de maillots festive */
         .sizes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .size-card {
             background: rgba(255, 255, 255, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 12px;
-            padding: 15px 10px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: 0.3s;
         }
 
         .size-card:hover {
             background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .size-card.selected {
             background: #ffe000;
             color: #ff0844;
             border-color: #ffe000;
-            box-shadow: 0 0 20px rgba(255, 224, 0, 0.8);
+            box-shadow: 0 0 15px rgba(255, 224, 0, 0.8);
             transform: scale(1.05);
         }
 
-        /* Alerte date limite */
+        /* Style des blocs de détails (Étape 2) */
+        .detail-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .detail-card h3 {
+            font-size: 1rem;
+            color: #ffe000;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-card p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #fce4ec;
+            margin-bottom: 10px;
+        }
+
+        /* Style des images à importer (F1, F2, etc.) */
+        .img-preview {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        .img-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
         .deadline-box {
             background: rgba(0, 0, 0, 0.3);
             border: 2px dashed #ffe000;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 10px;
             text-align: center;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
             color: #fff;
         }
 
         .btn-container {
             display: flex;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .btn {
             flex: 1;
-            padding: 14px;
+            padding: 12px;
             border-radius: 12px;
             border: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
@@ -246,8 +306,8 @@
 
         .btn-primary:hover {
             background: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255,224,0,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,224,0,0.5);
         }
 
         .btn-secondary {
@@ -260,17 +320,16 @@
             background: rgba(255, 255, 255, 0.4);
         }
 
-        /* Points d'étape */
         .dots {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(255,255,255,0.4);
             transition: 0.3s;
@@ -278,19 +337,18 @@
 
         .dot.active {
             background: #ffe000;
-            width: 30px;
+            width: 25px;
             border-radius: 6px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Lecteur audio caché avec musique allemande joyeuse (accordéon / fête populaire) -->
+    <!-- Lecteur audio de fond -->
     <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=happy-kafe-110425.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Bouton musique -->
     <button class="music-control" onclick="toggleMusic()">
         <i class="fa-solid fa-music" id="musicIcon"></i> <span id="musicText">Musique OFF</span>
     </button>
@@ -300,10 +358,10 @@
         <div class="header-subtitle">🎉 Die grosse Geburtstagsfeier 🎉</div>
 
         <form id="partyForm">
-            <!-- ÉTAPE 1 -->
+            <!-- ÉTAPE 1 : Informations personnelles -->
             <div class="step active" id="step-1">
                 <div class="welcome-box">
-                    ✨ <strong>Herzlich willkommen !</strong> Viens célébrer avec nous la force de notre communauté et l'amour de la langue allemande. Remplis tes accès pour lancer la fête !
+                    ✨ <strong>Herzlich willkommen !</strong> Viens célébrer avec nous l'excellence, la langue allemande et notre magnifique communauté. Remplis tes informations pour lancer la fête !
                 </div>
 
                 <div class="form-group">
@@ -335,40 +393,78 @@
                 </div>
             </div>
 
-            <!-- ÉTAPE 2 -->
+            <!-- ÉTAPE 2 : Contribution, Maillot, Stade, Bus, DJ & Buffet -->
             <div class="step" id="step-2">
                 <div class="welcome-box" style="border-left-color: #00f2fe;">
-                    👕 Sélectionne ton maillot officiel et ta date de contribution pour marquer cet événement d'une pierre blanche !
+                    💰 <strong>Montant de la contribution : 8 000 FCFA</strong><br>
+                    Ce montant unique est calculé pour couvrir l'ensemble des activités de la journée afin que personne ne débourse un centime de plus sur place !
                 </div>
 
-                <div class="form-group">
-                    <label>Taille de maillot</label>
-                    <input type="hidden" id="selectedSize" required>
-                    <div class="sizes-grid">
-                        <div class="size-card" onclick="selectSize(this, 'S')">S</div>
-                        <div class="size-card" onclick="selectSize(this, 'M')">M</div>
-                        <div class="size-card" onclick="selectSize(this, 'L')">L</div>
-                        <div class="size-card" onclick="selectSize(this, 'XL')">XL</div>
-                        <div class="size-card" onclick="selectSize(this, 'XXL')">XXL</div>
-                        <div class="size-card" onclick="selectSize(this, '3XL')">3XL</div>
+                <!-- 1. Le Maillot -->
+                <div class="detail-card">
+                    <h3><i class="fa-solid fa-shirt"></i> 1. Le Maillot Officiel</h3>
+                    <p>Indispensable pour notre grand <strong>match de gala inter-niveaux</strong> ! Il unifie les équipes et crée une ambiance sportive digne des plus grands championnats.</p>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label>Choisis ta taille :</label>
+                        <input type="hidden" id="selectedSize" required>
+                        <div class="sizes-grid">
+                            <div class="size-card" onclick="selectSize(this, 'S')">S</div>
+                            <div class="size-card" onclick="selectSize(this, 'M')">M</div>
+                            <div class="size-card" onclick="selectSize(this, 'L')">L</div>
+                            <div class="size-card" onclick="selectSize(this, 'XL')">XL</div>
+                            <div class="size-card" onclick="selectSize(this, 'XXL')">XXL</div>
+                            <div class="size-card" onclick="selectSize(this, '3XL')">3XL</div>
+                        </div>
+                    </div>
+                    <!-- Photo F1.jpg (Maillot) -->
+                    <div class="img-preview">
+                        <img src="F1.jpg" alt="Maillot officiel" onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Insérer l\'image du maillot (Nommer le fichier : F1.jpg)';">
+                    </div>
+                </div>
+
+                <!-- 2. Le Stade -->
+                <div class="detail-card">
+                    <h3><i class="fa-solid fa-futbol"></i> 2. Le Stade (Ecopark)</h3>
+                    <p>Réservation du magnifique <strong>stade synthétique</strong> sécurisé d'Ecopark pour le match de gala et les activités sportives en plein air.</p>
+                    <!-- Photo F2.jpg (Stade) -->
+                    <div class="img-preview">
+                        <img src="F2.jpg" alt="Stade Ecopark" onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Insérer l\'image du stade (Nommer le fichier : F2.jpg)';">
+                    </div>
+                </div>
+
+                <!-- 3. Le Bus -->
+                <div class="detail-card">
+                    <h3><i class="fa-solid fa-bus"></i> 3. Le Transport (Bus)</h3>
+                    <p>Location d'un bus de transport sécurisé pour assurer le retour groupé et l'ambiance après le match.</p>
+                    <!-- Photo F3.jpg (Bus) -->
+                    <div class="img-preview">
+                        <img src="F3.jpg" alt="Bus de transport" onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Insérer l\'image du bus (Nommer le fichier : F3.jpg)';">
+                    </div>
+                </div>
+
+                <!-- 4. Le DJ et le Buffet -->
+                <div class="detail-card">
+                    <h3><i class="fa-solid fa-music"></i> 4. DJ & Buffet (Optionnel)</h3>
+                    <p>Animation musicale non-stop avec un DJ pro pour ambiancer la partie, accompagnée d'un buffet festif pour se restaurer ensemble.</p>
+                    <!-- Photo F4.jpg (Buffet / DJ) -->
+                    <div class="img-preview">
+                        <img src="F4.jpg" alt="Buffet et DJ" onerror="this.style.display='none'; this.parentElement.innerHTML='📷 Insérer l\'image du buffet/DJ (Nommer le fichier : F4.jpg)';">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="contribDate">Date de contribution prévue</label>
+                    <label for="contribDate">Date prévue de contribution</label>
                     <input type="date" id="contribDate" required>
                 </div>
 
-                <div class="deadline-box" id="germanDeadlineText">
-                    <!-- Rempli par JS -->
-                </div>
+                <div class="deadline-box" id="germanDeadlineText"></div>
 
                 <div class="btn-container">
                     <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
                         <i class="fa-solid fa-arrow-left"></i> Retour
                     </button>
                     <button type="submit" class="btn btn-primary">
-                        Valider <i class="fa-brands fa-whatsapp"></i>
+                        Valider via WhatsApp <i class="fa-brands fa-whatsapp"></i>
                     </button>
                 </div>
             </div>
@@ -381,7 +477,6 @@
     </div>
 
     <script>
-        // Gestion de la musique
         const music = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
@@ -394,14 +489,13 @@
                 musicText.innerText = "Musique OFF";
                 isPlaying = false;
             } else {
-                music.play().catch(e => console.log("Lecture audio bloquée par le navigateur"));
+                music.play().catch(e => console.log("Audio bloqué"));
                 musicIcon.className = "fa-solid fa-volume-high";
                 musicText.innerText = "Musique ON";
                 isPlaying = true;
             }
         }
 
-        // Date limite automatique en allemand
         function getNextFridayInGerman() {
             const today = new Date();
             const resultDate = new Date(today.getTime());
@@ -416,14 +510,12 @@
 
         document.getElementById('germanDeadlineText').innerHTML = getNextFridayInGerman();
 
-        // Sélection des tailles
         function selectSize(element, size) {
             document.querySelectorAll('.size-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
             document.getElementById('selectedSize').value = size;
         }
 
-        // Navigation
         function nextStep(current) {
             const fullname = document.getElementById('fullname').value.trim();
             const niveau = document.getElementById('niveau').value;
@@ -449,7 +541,6 @@
             document.getElementById(`dot-${current - 1}`).classList.add('active');
         }
 
-        // Envoi WhatsApp
         document.getElementById('partyForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const size = document.getElementById('selectedSize').value;
@@ -464,7 +555,8 @@
             const contribDate = document.getElementById('contribDate').value;
             const organizerPhone = "237687549784"; 
 
-            const text = `🎉 *GEBURTSTAG IDL-INSTITUT* 🎉%0a` +
+            const text = `🎉 *INSCRIPTION ANNIVERSAIRE IDL-INSTITUT* 🎉%0a` +
+                         `💰 *Montant :* 8 000 FCFA%0a` +
                          `👤 *Nom :* ${encodeURIComponent(fullname)}%0a` +
                          `📚 *Niveau :* ${encodeURIComponent(niveau)}%0a` +
                          `📞 *Numéro :* ${encodeURIComponent(phone)}%0a` +
